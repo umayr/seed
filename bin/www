@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var target = process.env.target || 'dev';
+
+var config = require(require('path').normalize('../src/config/environment'))[target];
+
+// # Setup Restify App
+var server = require('../src/bootstrap/server')(config);
+
+// # Registering all routes
+require('../src/config/routes')(server);
+
+// # Start Restify App
+server.listen(config.port);
+console.log('API is running on: ' + config.port);
