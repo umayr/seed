@@ -10,6 +10,9 @@ $ bash <(curl -s https://raw.githubusercontent.com/umayr/seed/master/clone.sh)
 
 # or the other way
 $ bash <(curl -s https://raw.githubusercontent.com/umayr/seed/master/clone.sh) path/to/project
+
+# if you prefer wget
+$ bash <(wget -qO- https://raw.githubusercontent.com/umayr/seed/master/clone.sh) path/to/project
 ```
 
 ## Contribute?
