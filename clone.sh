@@ -10,21 +10,25 @@ YELLOW='\033[0;33m';
 function process (){
 
 	# Cloning the repository from `https://github.com/umayr/seed`
-	echo "\n\r${YELLOW}Cloning Repository from \`https://github.com/umayr/seed\`.${COLOR_OFF}"
-	git clone https://github.com/umayr/seed ${DIRECTORY} || exit 1;
+	printf "\n\r${YELLOW}Cloning Repository from \`https://github.com/umayr/seed\`.${COLOR_OFF}"
+	echo;
+	git clone -b source --single-branch https://github.com/umayr/seed ${DIRECTORY} || exit 1;
 
 	# Changing directory to the clone repository
 	cd ${DIRECTORY};
 
 	# Now removing the remote origin
-	echo "\n\r${YELLOW}Done cloning, removing origin & reinitializing repository for you.${COLOR_OFF}"
+	printf "\n\r${YELLOW}Done cloning, removing origin & reinitializing repository for you.${COLOR_OFF}"
+	echo;
 	git remote remove origin || exit 1;
 
 	# Re-initializing the repository.
 	git init;
+	git checkout -b master;
+	git branch -d source;
 
 	# Tada~~
-	echo "\n\r${GREEN}Everything seems perfect. Good luck with your new project.${COLOR_OFF}"
+	printf "\n\r${GREEN}Everything seems perfect. Good luck with your new project.${COLOR_OFF}"
 	exit 0;
 }
 
@@ -34,7 +38,7 @@ if [[ -z $1 ]]; then
 	process;
 else
 	if [ -d "$1" ]; then
-	  echo "${RED}Provided directory \`${1}\` already exits.";
+	  printf "${RED}Provided directory \`${1}\` already exits.";
 	  exit 1;
 	else
 		DIRECTORY=$1;
